@@ -1,5 +1,6 @@
 plugins {
-    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 group 'org.example'
@@ -10,10 +11,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
-test {
-    useJUnitPlatform()
+application {
+    mainClass = 'Main'
+}
+
+javafx {
+    version = "18"
+    modules = [ 'javafx.controls' , 'javafx.fxml' ]
 }
