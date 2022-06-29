@@ -40,4 +40,8 @@ public class joinGameController {
             //TODO: send an alert to tell player that game is not available
         }
     }
+
+    public void onBackToMainMenuButtonClicked(ActionEvent actionEvent) {
+        MainController.getInstance().setAnchorPane("/views/menu-view.fxml");
+    }
 }

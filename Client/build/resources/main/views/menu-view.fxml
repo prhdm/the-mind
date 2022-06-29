@@ -8,17 +8,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <HBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0">
          <children>
-            <TextField fx:id="nameTextField" />
-            <Button mnemonicParsing="false" onAction="#OnStartGameButtonClicked" text="Start Game" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#OnJoinGameButtonClicked" text="Join Game" />
+                  <TextField fx:id="nameTextField" />
+                  <Button mnemonicParsing="false" onAction="#OnStartGameButtonClicked" text="Start Game" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#OnJoinGameButtonClicked" text="Join Game" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#onExitButtonClicked" text="Exit Game" />
                </children>
-            </HBox>
-            <Button mnemonicParsing="false" onAction="#onExitButtonClicked" text="Exit Game" />
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>
