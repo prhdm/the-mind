@@ -16,8 +16,21 @@ public class Stage extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
+        final double[] xOffset = {0};
+        final double[] yOffset = {0};
+        root.setOnMousePressed(event -> {
+            xOffset[0] = event.getSceneX();
+            yOffset[0] = event.getSceneY();
+        });
+        root.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() - xOffset[0]);
+            primaryStage.setY(event.getScreenY() - yOffset[0]);
+        });
         primaryStage.show();
     }
+
+
+
 
     public void run() {
         launch();

@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class RequestHandler implements Runnable {
     private static boolean isConnect;
     private final RequestType requestType;
-    private Response response;
+    private static Response response;
     private final String body;
     private static String authToken;
 
@@ -58,7 +58,7 @@ public class RequestHandler implements Runnable {
                 authToken = null;
                 sendRequest();
                 authToken = response.getBody();
-            } else if (requestType == RequestType.GET_PLAYERS) {
+            } else if (requestType == RequestType.GET_PLAYERS || requestType == RequestType.START_GAME) {
                 SyncBlock.getInstance().notifyBlock();
                 openStream(requestType);
             } else {
@@ -99,8 +99,10 @@ public class RequestHandler implements Runnable {
         String req = gson.toJson(request);
         printWriter.println(req);
         printWriter.flush();
-        String input = scanner.nextLine();
-        response = gson.fromJson(input,Response.class);
+        if (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            response = gson.fromJson(input, Response.class);
+        }
         scanner.close();
         socket.close();
         printWriter.close();
@@ -112,7 +114,7 @@ public class RequestHandler implements Runnable {
         init(requestType);
     }
 
-    public Response getResponse() {
+    public static Response getResponse() {
         return response;
     }
 }

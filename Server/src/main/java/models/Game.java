@@ -2,14 +2,24 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class Game {
+    private final List<Integer> cards = new ArrayList<>();
     private String host;
     private final String gameText;
+    private int heartsLeft;
+
+    public int getMaxLevels() {
+        return maxLevels;
+    }
+
     private final int maxLevels;
 
     public Game(String gameText, int maxPlayers, int maxLevels, boolean isPrivate) {
+        level = 1;
+        heartsLeft = maxPlayers;
         this.gameText = gameText;
         this.maxPlayers = maxPlayers;
         this.maxLevels = maxLevels;
@@ -18,7 +28,6 @@ public class Game {
         isPrivate = false;
         for (int i = 0; i < maxPlayers; i++) {
             bots.add(new Player("Bot "+i));
-            playerList.add(bots.get(i));
         }
     }
 
@@ -27,18 +36,19 @@ public class Game {
     private final List<Player> bots = new ArrayList<>();
 
     private int level;
-    private final boolean isGameStarted;
+    private boolean isGameStarted;
     private final boolean isPrivate;
-    private final List<Integer> cards = new ArrayList<>(100);
 
-    private int getRandomNumber() {
-        int random = new Random().nextInt(1,100);
-        while (cards.get(random) == 1) {
-            random = new Random().nextInt(1,100);
-        }
-        cards.set(random,1);
-        return random;
+    public List<Integer> getDroppedCards() {
+        return droppedCards;
     }
+
+    public void addToDroppedCards(int i) {
+        droppedCards.add(i);
+    }
+
+    private final List<Integer> droppedCards = new ArrayList<>();
+
 
     @Override
     public String toString() {
@@ -54,7 +64,10 @@ public class Game {
     }
 
     public void addPlayer(Player player) {
+        player.setCards(bots.get(0).getCards());
         playerList.add(player);
+        bots.remove(0);
+
     }
 
     public void setHost(String player) {
@@ -75,9 +88,76 @@ public class Game {
 
     public void removePlayer(Player player) {
         playerList.remove(player);
-        Player newPlayer = new Player("Bot "+bots.size());
-        newPlayer.setCards(player.getCards());
-        bots.add(newPlayer);
-        playerList.add(newPlayer);
+        player.setName("Bot: "+bots.size());
+        bots.add(player);
+    }
+
+    public void startGame() {
+        isGameStarted = true;
+        for (int i = 0; i < 100; i++) {
+            cards.add(i+1);
+        }
+        for (Player p :playerList) {
+            List<Integer> temp = new ArrayList<>();
+            for (int i = 0; i < level; i++) {
+                temp.add(cards.remove(new Random().nextInt(0,cards.size())));
+            }
+            p.setCards(temp);
+        }
+        for (Player p: bots) {
+            List<Integer> temp = new ArrayList<>();
+            for (int i = 0; i < level; i++) {
+                temp.add(cards.remove(new Random().nextInt(0,cards.size())));
+            }
+            p.setCards(temp);
+        }
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getHearts() {
+        return heartsLeft;
+    }
+
+    public boolean play(Player player, int card) {
+        for (int i : droppedCards) {
+            if (i> card)
+                return false;
+        }
+        for (Player p: playerList) {
+            List<Integer> cards = p.getCards();
+            for (int i: cards) {
+                if (i>card)
+                    return false;
+            }
+        }
+        for (Player p: bots) {
+            List<Integer> cards = p.getCards();
+            for (int i: cards) {
+                if (i>card)
+                    return false;
+            }
+        }
+        player.dropCard(card);
+        droppedCards.add(card);
+        return true;
+    }
+
+    public void removeHeart() {
+        heartsLeft--;
+    }
+
+    public boolean isLevelFinished() {
+        return droppedCards.size() == level*maxPlayers;
+    }
+
+    public void levelUp() {
+        level++;
+    }
+
+    public List<Player> getBots() {
+        return bots;
     }
 }
