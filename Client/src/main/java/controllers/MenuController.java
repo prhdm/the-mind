@@ -1,7 +1,9 @@
 package controllers;
 
+import client.RequestHandler;
+import client.request.RequestType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
 public class MenuController {
     public TextField nameTextField;
@@ -11,22 +13,26 @@ public class MenuController {
     }
 
     public void OnStartGameButtonClicked() {
-        // TODO: Load a new pane for entering game settings and waiting for ppl to connect
         String name = nameTextField.getText();
+        new RequestHandler(RequestType.AUTHENTICATE,name);
         if (name.equals(""))
-            System.out.println("ridi");
+            MainController.getInstance().showAlert("Please Enter a name","Name is empty");
+        else if (RequestHandler.isConnected())
+            MainController.getInstance().setAnchorPane("/views/startGame-view.fxml");
         else
-            MainController.getInstance().setAnchorPane("/views/joinGame-view.fxml");
-
+            MainController.getInstance().showAlert("Connection Refused","Please Check your Internet");
     }
 
+
+
     public void OnJoinGameButtonClicked() {
-        //TODO: Show list of available games
-        // TODO: Load a new page and show the list of available game.
         String name = nameTextField.getText();
+        new RequestHandler(RequestType.AUTHENTICATE,name);
         if (name.equals(""))
-            System.out.println("ridi");
-        else
+            MainController.getInstance().showAlert("Please Enter a name","Name is empty");
+        else if (RequestHandler.isConnected())
             MainController.getInstance().setAnchorPane("/views/joinGame-view.fxml");
+        else
+            MainController.getInstance().showAlert("Connection Refused","Please Check your Internet");
     }
 }
