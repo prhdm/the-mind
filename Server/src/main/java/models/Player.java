@@ -31,4 +31,21 @@ public class Player {
     public void setCards(List<Integer> cards) {
         this.cards = cards;
     }
+
+    public void setName(String s) {
+        this.playerName = s;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerName='" + playerName + '\'' +
+                ", gameID='" + gameID + '\'' +
+                ", cards=" + cards +
+                '}';
+    }
+
+    public void dropCard(int card) {
+        cards.removeIf(integer -> integer==card);
+    }
 }

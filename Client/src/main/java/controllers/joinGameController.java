@@ -31,10 +31,13 @@ public class joinGameController {
 
     public void onEnterGameButtonClicked(ActionEvent actionEvent) {
         String gameId=gamdIdTextField.getText();
-        Response response = new RequestHandler(RequestType.JOIN_GAME,gameId).getResponse();
+        new RequestHandler(RequestType.JOIN_GAME,gameId);
+        Response response = RequestHandler.getResponse();
         if (response.getStatus() == 1) {
             RequestHandler.setGameId(gameId);
             if (response.getBody().split(",")[0].equals("1")) {
+                new RequestHandler(RequestType.START_GAME,RequestHandler.getGameId());
+                MainController.getInstance().setAnchorPane("/views/game-view.fxml");
             } else {
                 System.out.println(response.getBody());
                 RequestHandler.setHost(response.getBody().split(",")[1]);

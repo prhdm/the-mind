@@ -30,14 +30,14 @@ public class StartGameController {
 
     public void onBackToMainMenuButtonClicked(ActionEvent actionEvent) {
         MainController.getInstance().setAnchorPane("/views/menu-view.fxml");
-        new RequestHandler(RequestType.EXIT_GAME,RequestHandler.getGameId());
     }
 
     public void onCreateGameButtonClicked() {
         Game game = new Game(gameTextTextField.getText(), isPrivateCheckBox.isSelected(),numberOfPlayersChoiceBox.getValue(),numberOfLevelsChoiceBox.getValue());
         Gson gson = new Gson();
         String body = gson.toJson(game);
-        Response response = new RequestHandler(RequestType.CREATE_GAME,body).getResponse();
+        new RequestHandler(RequestType.CREATE_GAME,body);
+        Response response = RequestHandler.getResponse();
         if (response.getStatus() == 1) {
             RequestHandler.setGameId(response.getBody());
             Platform.runLater(() -> {

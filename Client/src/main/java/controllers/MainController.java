@@ -1,5 +1,6 @@
 package controllers;
 
+import client.RequestHandler;
 import client.request.RequestType;
 import client.response.Response;
 import javafx.fxml.FXML;
@@ -47,9 +48,12 @@ public class MainController {
         switch (requestType) {
             case GET_PLAYERS -> {
                 System.out.println(response.getBody());
-                LobbyController.getInstance().update(response.getBody());
-            } case UPDATE_GAME -> {
-
+                if (response.getBody().equals("start"))
+                    setAnchorPane("/views/game-view.fxml");
+                else
+                    LobbyController.getInstance().update(response.getBody());
+            } case START_GAME -> {
+                GameController.getInstance().update(response.getBody());
             }
         }
     }

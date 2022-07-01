@@ -29,16 +29,21 @@ public class LobbyController {
     }
     public void onBackToMainMenuButtonClicked() {
         MainController.getInstance().setAnchorPane("/views/menu-view.fxml");
+        new RequestHandler(RequestType.EXIT_GAME,RequestHandler.getGameId());
     }
 
     public void onStartGameButtonClicked() {
-
+        new RequestHandler(RequestType.START_GAME,RequestHandler.getGameId());
     }
 
     public void update(String body) {
         String players[] = body.replace("[","").replace("]","").replace(",{"," {").split(" ");
+        playerList.getItems().clear();
         Arrays.stream(players).forEach(s -> playerList.getItems().add(s));
         if (RequestHandler.isHost()) {
+            startGameButton.setDisable(false);
+        } else {
+            startGameButton.setDisable(true);
         }
     }
 }
