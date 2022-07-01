@@ -8,6 +8,12 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
+    private static Config config;
+    public static Config getInstance() {
+        if (config == null)
+            config = new Config();
+        return config;
+    }
     public String host;
     public int port;
     public Config() {
