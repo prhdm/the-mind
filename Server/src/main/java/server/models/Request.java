@@ -2,6 +2,6 @@ package server.models;
 
 public class Request  {
     public String authToken;
-    public String url;
+    public RequestType url;
     public String body;
 }

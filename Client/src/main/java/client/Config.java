@@ -2,7 +2,6 @@ package client;
 
 import utils.ResourceLoader;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
@@ -22,8 +21,7 @@ public class Config {
             props.load(input);
             host = props.getProperty("host");
             port =  Integer.parseInt(props.getProperty("port"));
-        } catch ( Exception e ) {
-            e.printStackTrace();
+        } catch ( Exception ignored) {
         }
 
     }

@@ -1,0 +1,46 @@
+.button {
+  -fx-background-color:
+          linear-gradient(#ffd65b, #e68400),
+          linear-gradient(#ffef84, #f2ba44),
+          linear-gradient(#ffea6a, #efaa22),
+          linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+          linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+  -fx-background-insets: 0,1,2,3,0;
+  -fx-text-fill: #654b00;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-padding: 10 20 10 20;
+}
+.button:hover {
+  -fx-background-color:
+          linear-gradient(#e68400, #ffd65b),
+          linear-gradient(#f2ba44, #ffef84),
+          linear-gradient(#efaa22, #ffea6a),
+          linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+          linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+  -fx-background-insets: 0,1,2,3,0;
+  -fx-text-fill: #654b00;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-padding: 10 20 10 20;
+}
+
+.label {
+  -fx-text-fill: #f8b936;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-padding: 10 20 10 20;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+  /* 3:, 4: */
+  -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+  -fx-text-fill: white; /* 5 */
+}
+.list-cell { -fx-text-fill: black; /* 5 */ }
+.list-cell:odd { -fx-background-color: #f8b936; /* 1 */ }
+.list-cell:even { -fx-background-color: #eca756; /* for information */ }
+.list-cell:filled:hover {
+  -fx-background-color: #ffae0b; /* 2 */
+  -fx-text-fill: white; /* 5 */
+}

@@ -38,7 +38,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "{" +
                 "playerName='" + playerName + '\'' +
                 ", gameID='" + gameID + '\'' +
                 ", cards=" + cards +

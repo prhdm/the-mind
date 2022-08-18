@@ -3,37 +3,92 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameController">
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" stylesheets="@./Style.scss" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.GameController">
    <children>
-      <VBox prefHeight="720.0" prefWidth="1080.0">
+      <ImageView fitHeight="720.0" fitWidth="1080.0" pickOnBounds="true">
+         <image>
+            <Image url="@../background.png" />
+         </image>
+         <effect>
+            <BoxBlur width="8.04" />
+         </effect>
+      </ImageView>
+      <HBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="720.0" prefWidth="360.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="252.0" spacing="10.0">
                      <children>
-                        <Label text="Number of lives" />
-                        <Label text="Label" />
-                        <Button mnemonicParsing="false" text="Ninja" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#onExitGameClicked" text="Close" />
+                        <Button mnemonicParsing="false" onAction="#onEmojiButtonClicked" prefHeight="80.0" prefWidth="80.0" text="😝">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onEmojiButtonClicked" prefHeight="80.0" prefWidth="80.0" text="😒">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onEmojiButtonClicked" prefHeight="80.0" prefWidth="80.0" text="😂">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onEmojiButtonClicked" prefHeight="80.0" prefWidth="80.0" text="😇">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onEmojiButtonClicked" prefHeight="80.0" prefWidth="80.0" text="😭">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Button>
                      </children>
                   </VBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="720.0" prefWidth="415.0">
                <children>
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Label text="Number of lives" />
+                              <Label text="Level" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="numberOfLives" text="Label" />
+                              <Label fx:id="level" text="Level" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="actionResults" prefHeight="329.0" prefWidth="397.0" styleClass="pretty-list-view" />
+                  <HBox fx:id="cardsPlace" alignment="CENTER" prefHeight="100.0" prefWidth="360.0" spacing="5.0" />
                </children>
-            </HBox>
-            <HBox fx:id="cardsPlace" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+            </VBox>
+            <VBox alignment="TOP_RIGHT" prefHeight="720.0" prefWidth="360.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onExitGameClicked" text="Close" />
+                  <VBox alignment="CENTER" prefHeight="657.0" prefWidth="342.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onNinjaButtonClicked" text="Ninja" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

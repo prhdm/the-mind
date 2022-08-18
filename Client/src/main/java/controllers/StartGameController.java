@@ -6,6 +6,7 @@ import client.response.Response;
 import com.google.gson.Gson;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -13,9 +14,17 @@ import javafx.scene.control.TextField;
 import models.Game;
 
 public class StartGameController {
+
+    @FXML
     public CheckBox isPrivateCheckBox;
+
+    @FXML
     public ChoiceBox<Integer> numberOfPlayersChoiceBox;
+
+    @FXML
     public ChoiceBox<Integer> numberOfLevelsChoiceBox;
+
+    @FXML
     public TextField gameTextTextField;
 
     public void initialize() {
@@ -28,7 +37,8 @@ public class StartGameController {
         }
     }
 
-    public void onBackToMainMenuButtonClicked(ActionEvent actionEvent) {
+    @FXML
+    public void onBackToMainMenuButtonClicked() {
         MainController.getInstance().setAnchorPane("/views/menu-view.fxml");
     }
 
@@ -36,13 +46,12 @@ public class StartGameController {
         Game game = new Game(gameTextTextField.getText(), isPrivateCheckBox.isSelected(),numberOfPlayersChoiceBox.getValue(),numberOfLevelsChoiceBox.getValue());
         Gson gson = new Gson();
         String body = gson.toJson(game);
-        new RequestHandler(RequestType.CREATE_GAME,body);
-        Response response = RequestHandler.getResponse();
+        RequestHandler req = new RequestHandler(RequestType.CREATE_GAME,body);
+        req.sendRequest();
+        Response response = req.getResponse();
         if (response.getStatus() == 1) {
             RequestHandler.setGameId(response.getBody());
-            Platform.runLater(() -> {
-                MainController.getInstance().setAnchorPane("/views/lobby-view.fxml");
-            });
+            MainController.getInstance().setAnchorPane("/views/lobby-view.fxml");
         }
     }
 }
