@@ -1,8 +1,6 @@
 package controllers;
 
-import client.RequestHandler;
-import client.request.RequestType;
-import client.response.Response;
+import config.ConfigPath;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -18,7 +16,7 @@ public class MainController {
 
     public void initialize() {
         mainController = this;
-        setAnchorPane("/views/menu-view.fxml");
+        setAnchorPane(ConfigPath.Menu);
     }
 
     public static MainController getInstance() {
@@ -32,9 +30,7 @@ public class MainController {
             AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxml)));
             mainPane.getChildren().setAll(pane);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        catch (Exception ignored) {}
     }
 
     void showAlert(String connection_refused, String please_check_your_internet) {
@@ -44,17 +40,4 @@ public class MainController {
         alert.showAndWait();
     }
 
-    public void realTimeupdate(RequestType requestType, Response response) {
-        switch (requestType) {
-            case GET_PLAYERS -> {
-                System.out.println(response.getBody());
-                if (response.getBody().equals("start"))
-                    setAnchorPane("/views/game-view.fxml");
-                else
-                    LobbyController.getInstance().update(response.getBody());
-            } case START_GAME -> {
-                GameController.getInstance().update(response.getBody());
-            }
-        }
-    }
 }

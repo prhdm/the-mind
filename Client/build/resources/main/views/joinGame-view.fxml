@@ -3,18 +3,29 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.joinGameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@./Style.scss" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.joinGameController">
    <children>
+      <ImageView fitHeight="720.0" fitWidth="1080.0" pickOnBounds="true">
+         <image>
+            <Image url="@../background.png" />
+         </image>
+         <effect>
+            <BoxBlur width="8.04" />
+         </effect>
+      </ImageView>
       <HBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0">
          <children>
             <ListView fx:id="availableGamesList" onMouseClicked="#onGameClicked" prefHeight="200.0" prefWidth="580.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0">
                <children>
-                  <TextField fx:id="gamdIdTextField" alignment="CENTER" prefHeight="0.0" prefWidth="20.0" />
+                  <TextField fx:id="gamedIdTextField" alignment="CENTER" prefHeight="0.0" prefWidth="20.0" />
                   <Button mnemonicParsing="false" onAction="#onEnterGameButtonClicked" text="Enter Game" />
                </children>
             </VBox>

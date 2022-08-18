@@ -1,14 +1,16 @@
 package server;
 
+import config.ConfigPath;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
-    public int port;
+    private int port;
     public Config() {
-        try (InputStream input = new FileInputStream(new File("").getAbsolutePath() + "/src/main/resources/config/config.properties")) {
+        try (InputStream input = new FileInputStream(ConfigPath.Config)) {
             Properties props = new Properties();
             props.load(input);
             port =  Integer.parseInt(props.getProperty("port"));
@@ -16,5 +18,9 @@ public class Config {
             e.printStackTrace();
         }
 
+    }
+
+    public int getPort() {
+        return port;
     }
 }
